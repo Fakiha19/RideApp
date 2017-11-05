@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="RideAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblDriver">
+    <Key>
+      <PropertyRef Name="DId" />
+    </Key>
+    <Property Name="DId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Salary" Type="Int32" />
+    <Property Name="Residence" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblRides" Relationship="Self.FK__tblRides__Driver__267ABA7A" FromRole="tblDriver" ToRole="tblRides" />
+  </EntityType>
+  <EntityType Name="tblPassenger">
+    <Key>
+      <PropertyRef Name="PId" />
+    </Key>
+    <Property Name="PId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ConatctNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblRides" Relationship="Self.FK__tblRides__Passen__276EDEB3" FromRole="tblPassenger" ToRole="tblRides" />
+  </EntityType>
+  <EntityType Name="tblRide">
+    <Key>
+      <PropertyRef Name="RId" />
+    </Key>
+    <Property Name="RId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Driver" Type="Int32" />
+    <Property Name="Passenger" Type="Int32" />
+    <Property Name="RequestLocation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Destination" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="vehicle" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Rent" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+    <Property Name="shift" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tblDriver" Relationship="Self.FK__tblRides__Driver__267ABA7A" FromRole="tblRides" ToRole="tblDriver" />
+    <NavigationProperty Name="tblPassenger" Relationship="Self.FK__tblRides__Passen__276EDEB3" FromRole="tblRides" ToRole="tblPassenger" />
+  </EntityType>
+  <EntityType Name="tblUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Paasword" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="FK__tblRides__Driver__267ABA7A">
+    <End Role="tblDriver" Type="Self.tblDriver" Multiplicity="0..1" />
+    <End Role="tblRides" Type="Self.tblRide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblDriver">
+        <PropertyRef Name="DId" />
+      </Principal>
+      <Dependent Role="tblRides">
+        <PropertyRef Name="Driver" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tblRides__Passen__276EDEB3">
+    <End Role="tblPassenger" Type="Self.tblPassenger" Multiplicity="0..1" />
+    <End Role="tblRides" Type="Self.tblRide" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblPassenger">
+        <PropertyRef Name="PId" />
+      </Principal>
+      <Dependent Role="tblRides">
+        <PropertyRef Name="Passenger" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="RideAppEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblDrivers" EntityType="Self.tblDriver" />
+    <EntitySet Name="tblPassengers" EntityType="Self.tblPassenger" />
+    <EntitySet Name="tblRides" EntityType="Self.tblRide" />
+    <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+    <AssociationSet Name="FK__tblRides__Driver__267ABA7A" Association="Self.FK__tblRides__Driver__267ABA7A">
+      <End Role="tblDriver" EntitySet="tblDrivers" />
+      <End Role="tblRides" EntitySet="tblRides" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tblRides__Passen__276EDEB3" Association="Self.FK__tblRides__Passen__276EDEB3">
+      <End Role="tblPassenger" EntitySet="tblPassengers" />
+      <End Role="tblRides" EntitySet="tblRides" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

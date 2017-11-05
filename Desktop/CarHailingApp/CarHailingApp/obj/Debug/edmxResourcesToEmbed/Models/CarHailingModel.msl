@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RideAppModelStoreContainer" CdmEntityContainer="RideAppEntities">
+    <EntitySetMapping Name="tblDrivers">
+      <EntityTypeMapping TypeName="RideAppModel.tblDriver">
+        <MappingFragment StoreEntitySet="tblDriver">
+          <ScalarProperty Name="DId" ColumnName="DId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+          <ScalarProperty Name="Residence" ColumnName="Residence" />
+          <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPassengers">
+      <EntityTypeMapping TypeName="RideAppModel.tblPassenger">
+        <MappingFragment StoreEntitySet="tblPassenger">
+          <ScalarProperty Name="PId" ColumnName="PId" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConatctNo" ColumnName="ConatctNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblRides">
+      <EntityTypeMapping TypeName="RideAppModel.tblRide">
+        <MappingFragment StoreEntitySet="tblRides">
+          <ScalarProperty Name="RId" ColumnName="RId" />
+          <ScalarProperty Name="Driver" ColumnName="Driver" />
+          <ScalarProperty Name="Passenger" ColumnName="Passenger" />
+          <ScalarProperty Name="RequestLocation" ColumnName="RequestLocation" />
+          <ScalarProperty Name="Destination" ColumnName="Destination" />
+          <ScalarProperty Name="vehicle" ColumnName="vehicle" />
+          <ScalarProperty Name="Rent" ColumnName="Rent" />
+          <ScalarProperty Name="shift" ColumnName="shift" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblUsers">
+      <EntityTypeMapping TypeName="RideAppModel.tblUser">
+        <MappingFragment StoreEntitySet="tblUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Paasword" ColumnName="Paasword" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

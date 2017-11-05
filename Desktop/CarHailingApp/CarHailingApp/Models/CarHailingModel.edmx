@@ -1,0 +1,246 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="RideAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tblDriver">
+          <Key>
+            <PropertyRef Name="DId" />
+          </Key>
+          <Property Name="DId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="Residence" Type="varchar" MaxLength="30" />
+          <Property Name="ContactNo" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="tblPassenger">
+          <Key>
+            <PropertyRef Name="PId" />
+          </Key>
+          <Property Name="PId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="20" />
+          <Property Name="ConatctNo" Type="varchar" MaxLength="11" />
+        </EntityType>
+        <EntityType Name="tblRides">
+          <Key>
+            <PropertyRef Name="RId" />
+          </Key>
+          <Property Name="RId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Driver" Type="int" />
+          <Property Name="Passenger" Type="int" />
+          <Property Name="RequestLocation" Type="varchar" MaxLength="20" />
+          <Property Name="Destination" Type="varchar" MaxLength="20" />
+          <Property Name="vehicle" Type="varchar" MaxLength="15" />
+          <Property Name="Rent" Type="varchar" MaxLength="4" />
+          <Property Name="shift" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <EntityType Name="tblUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="20" />
+          <Property Name="Paasword" Type="varchar" MaxLength="16" />
+          <Property Name="Role" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <Association Name="FK__tblRides__Driver__267ABA7A">
+          <End Role="tblDriver" Type="Self.tblDriver" Multiplicity="0..1" />
+          <End Role="tblRides" Type="Self.tblRides" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDriver">
+              <PropertyRef Name="DId" />
+            </Principal>
+            <Dependent Role="tblRides">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRides__Passen__276EDEB3">
+          <End Role="tblPassenger" Type="Self.tblPassenger" Multiplicity="0..1" />
+          <End Role="tblRides" Type="Self.tblRides" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPassenger">
+              <PropertyRef Name="PId" />
+            </Principal>
+            <Dependent Role="tblRides">
+              <PropertyRef Name="Passenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RideAppModelStoreContainer">
+          <EntitySet Name="tblDriver" EntityType="Self.tblDriver" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblPassenger" EntityType="Self.tblPassenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblRides" EntityType="Self.tblRides" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUsers" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__tblRides__Driver__267ABA7A" Association="Self.FK__tblRides__Driver__267ABA7A">
+            <End Role="tblDriver" EntitySet="tblDriver" />
+            <End Role="tblRides" EntitySet="tblRides" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRides__Passen__276EDEB3" Association="Self.FK__tblRides__Passen__276EDEB3">
+            <End Role="tblPassenger" EntitySet="tblPassenger" />
+            <End Role="tblRides" EntitySet="tblRides" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RideAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tblDriver">
+          <Key>
+            <PropertyRef Name="DId" />
+          </Key>
+          <Property Name="DId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="Residence" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ContactNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblRides" Relationship="Self.FK__tblRides__Driver__267ABA7A" FromRole="tblDriver" ToRole="tblRides" />
+        </EntityType>
+        <EntityType Name="tblPassenger">
+          <Key>
+            <PropertyRef Name="PId" />
+          </Key>
+          <Property Name="PId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ConatctNo" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblRides" Relationship="Self.FK__tblRides__Passen__276EDEB3" FromRole="tblPassenger" ToRole="tblRides" />
+        </EntityType>
+        <EntityType Name="tblRide">
+          <Key>
+            <PropertyRef Name="RId" />
+          </Key>
+          <Property Name="RId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Driver" Type="Int32" />
+          <Property Name="Passenger" Type="Int32" />
+          <Property Name="RequestLocation" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Destination" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="vehicle" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Rent" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="shift" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tblDriver" Relationship="Self.FK__tblRides__Driver__267ABA7A" FromRole="tblRides" ToRole="tblDriver" />
+          <NavigationProperty Name="tblPassenger" Relationship="Self.FK__tblRides__Passen__276EDEB3" FromRole="tblRides" ToRole="tblPassenger" />
+        </EntityType>
+        <EntityType Name="tblUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Paasword" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__tblRides__Driver__267ABA7A">
+          <End Role="tblDriver" Type="Self.tblDriver" Multiplicity="0..1" />
+          <End Role="tblRides" Type="Self.tblRide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblDriver">
+              <PropertyRef Name="DId" />
+            </Principal>
+            <Dependent Role="tblRides">
+              <PropertyRef Name="Driver" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblRides__Passen__276EDEB3">
+          <End Role="tblPassenger" Type="Self.tblPassenger" Multiplicity="0..1" />
+          <End Role="tblRides" Type="Self.tblRide" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblPassenger">
+              <PropertyRef Name="PId" />
+            </Principal>
+            <Dependent Role="tblRides">
+              <PropertyRef Name="Passenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RideAppEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tblDrivers" EntityType="Self.tblDriver" />
+          <EntitySet Name="tblPassengers" EntityType="Self.tblPassenger" />
+          <EntitySet Name="tblRides" EntityType="Self.tblRide" />
+          <EntitySet Name="tblUsers" EntityType="Self.tblUser" />
+          <AssociationSet Name="FK__tblRides__Driver__267ABA7A" Association="Self.FK__tblRides__Driver__267ABA7A">
+            <End Role="tblDriver" EntitySet="tblDrivers" />
+            <End Role="tblRides" EntitySet="tblRides" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblRides__Passen__276EDEB3" Association="Self.FK__tblRides__Passen__276EDEB3">
+            <End Role="tblPassenger" EntitySet="tblPassengers" />
+            <End Role="tblRides" EntitySet="tblRides" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RideAppModelStoreContainer" CdmEntityContainer="RideAppEntities">
+          <EntitySetMapping Name="tblDrivers">
+            <EntityTypeMapping TypeName="RideAppModel.tblDriver">
+              <MappingFragment StoreEntitySet="tblDriver">
+                <ScalarProperty Name="DId" ColumnName="DId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Residence" ColumnName="Residence" />
+                <ScalarProperty Name="ContactNo" ColumnName="ContactNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblPassengers">
+            <EntityTypeMapping TypeName="RideAppModel.tblPassenger">
+              <MappingFragment StoreEntitySet="tblPassenger">
+                <ScalarProperty Name="PId" ColumnName="PId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ConatctNo" ColumnName="ConatctNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblRides">
+            <EntityTypeMapping TypeName="RideAppModel.tblRide">
+              <MappingFragment StoreEntitySet="tblRides">
+                <ScalarProperty Name="RId" ColumnName="RId" />
+                <ScalarProperty Name="Driver" ColumnName="Driver" />
+                <ScalarProperty Name="Passenger" ColumnName="Passenger" />
+                <ScalarProperty Name="RequestLocation" ColumnName="RequestLocation" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="vehicle" ColumnName="vehicle" />
+                <ScalarProperty Name="Rent" ColumnName="Rent" />
+                <ScalarProperty Name="shift" ColumnName="shift" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblUsers">
+            <EntityTypeMapping TypeName="RideAppModel.tblUser">
+              <MappingFragment StoreEntitySet="tblUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Paasword" ColumnName="Paasword" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
